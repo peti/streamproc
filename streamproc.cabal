@@ -1,10 +1,17 @@
-Name:            streamproc
-Version:         0.0-2007-08-26
-Author:          Shawn Garbett <shawn@garbett.org>, Peter Simons <simons@cryp.to>
-License:         BSD3
-Maintainer:      simons@cryp.to
-Homepage:        http://cryp.to/streamproc/
-Description:     Stream Processer Arrow
-Build-Depends:   base
+Name:           streamproc
+Version:        1.0
+Author:         Shawn Garbett <shawn@garbett.org>, Peter Simons <simons@cryp.to>
+License:        BSD3
+License-file:   LICENSE
+Maintainer:     simons@cryp.to
+Homepage:       http://cryp.to/streamproc/
+Category:       Control
+Description:    Stream Processer Arrow
+Build-Depends:  base
+
 Exposed-Modules:
     Control.Arrow.SP
+
+Data-files:
+    README,
+    prologue.txt
