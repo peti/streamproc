@@ -9,10 +9,8 @@ Category:       Control
 Description:    Stream Processer Arrow
 Synopsis:	Stream Processer Arrow
 Build-Depends:  base
-
 Exposed-Modules:
     Control.Arrow.SP
-
 Data-files:
     README,
     prologue.txt
