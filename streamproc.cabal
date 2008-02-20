@@ -7,7 +7,7 @@ Maintainer:     simons@cryp.to
 Homepage:       http://cryp.to/streamproc/
 Category:       Control
 Description:    Stream Processer Arrow
-Synopsis:	Stream Processer Arrow
+Synopsis:       Stream Processer Arrow
 Build-Depends:  base
 Exposed-Modules:
     Control.Arrow.SP
