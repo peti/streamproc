@@ -15,9 +15,9 @@
    * John Hughes, \"/Generalising Monads to Arrows/\":
      <http://www.cs.chalmers.se/~rjmh/Papers/arrows.pdf>
 
-   * Magnus Carlsson, Thomas Hallgren, \"/Fudgets--Purely
+   * Magnus Carlsson, Thomas Hallgren, \"Fudgets--Purely
      Functional Processes with applications to Graphical
-     User Interfaces/\":
+     User Interfaces\":
      <http://www.cs.chalmers.se/~hallgren/Thesis/>
 -}
 
@@ -27,6 +27,8 @@ module Control.Arrow.SP
   )
   where
 
+import Prelude hiding ( id, (.) )
+import Control.Category
 import Control.Arrow
 import Control.Monad ( liftM )
 
@@ -36,12 +38,15 @@ data SP m i o = Put o (SP m i o)
               | Get (i -> SP m i o)
               | Block (m (SP m i o))
 
+instance Monad m => Category (SP m) where
+  id                      = Get (\x -> Put x id)
+  (Get sp2) . (Put i sp1) = sp1 >>> sp2 i
+  (Put o sp2) . sp1       = Put o (sp1 >>> sp2)
+  (Get sp2) . (Get sp1)   = Get (\i -> sp1 i >>> Get sp2)
+  (Block spm) . sp        = Block (liftM (sp >>>) spm)
+  sp . (Block spm)        = Block (liftM (>>> sp) spm)
+
 instance Monad m => Arrow (SP m) where
-  Put i sp1 >>> Get sp2   = sp1 >>> sp2 i
-  sp1       >>> Put o sp2 = Put o (sp1 >>> sp2)
-  Get sp1   >>> Get sp2   = Get (\i -> sp1 i >>> Get sp2)
-  sp        >>> Block spm = Block (liftM (sp >>>) spm)
-  Block spm >>> sp        = Block (liftM (>>> sp) spm)
   arr f                   = Get (\x -> Put (f x) (arr f))
   first                   = bypass empty
     where

@@ -1,5 +1,0 @@
-A continuation-based stream processor implemented as an
-'Arrow'. This version generalizes the @SP@ described in John
-Hughes, \"Generalising Monads to Arrows*\",
-<http://www.cs.chalmers.se/~rjmh/Papers/arrows.pdf>, to
-support 'IO'.
