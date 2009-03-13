@@ -1,7 +1,7 @@
 Generic Stream Processor Arrow
 ==============================
 
-:Latest Release: streamproc-1.1.tar.gz_
+:Latest Release: streamproc-1.2.tar.gz_
 :Darcs:          darcs_ get --partial http://cryp.to/streamproc/
 
 Synopsis
@@ -36,6 +36,6 @@ Copyleft
 
 .. _darcs: http://abridgegame.org/darcs/
 
-.. _streamproc-1.1.tar.gz: http://cryp.to/streamproc/streamproc-1.1.tar.gz
+.. _streamproc-1.2.tar.gz: http://cryp.to/streamproc/streamproc-1.2.tar.gz
 
 .. _Reference Documentation: docs/index.html
