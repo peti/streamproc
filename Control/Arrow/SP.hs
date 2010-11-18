@@ -115,13 +115,6 @@ push :: a -> Queue a -> Queue a
 push x (Queue o i) = Queue o (x:i)
 
 pop :: Queue a -> Maybe (a, Queue a)
-pop (Queue (o:os) i) = Just (o,(Queue os i))
+pop (Queue (o:os) i) = Just (o, Queue os i)
 pop (Queue []    []) = Nothing
 pop (Queue []     i) = pop (Queue (reverse i) [])
-
-
--- ----- Configure Emacs -----
---
--- Local Variables: ***
--- haskell-program-name: "ghci -ignore-package streamproc -Wall" ***
--- End: ***
