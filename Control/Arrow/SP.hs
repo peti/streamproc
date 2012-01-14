@@ -13,7 +13,7 @@
    References:
 
    * John Hughes, \"/Generalising Monads to Arrows/\":
-     <www.ittc.ku.edu/Projects/SLDG/filing_cabinet/Hughes_Generalizing_Monads_to_Arrows.pdf>
+     <http://www.ittc.ku.edu/Projects/SLDG/filing_cabinet/Hughes_Generalizing_Monads_to_Arrows.pdf>
 
    * Magnus Carlsson, Thomas Hallgren, \"Fudgets--Purely
      Functional Processes with applications to Graphical
