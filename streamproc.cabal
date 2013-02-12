@@ -5,7 +5,7 @@ License:                BSD3
 License-File:           LICENSE
 Author:                 Shawn Garbett <shawn@garbett.org>, Peter Simons <simons@cryp.to>
 Maintainer:             Peter Simons <simons@cryp.to>
-Homepage:               http://gitorious.org/streamproc
+Homepage:               http://github.com/peti/streamproc
 Category:               Control
 Synopsis:               Stream Processer Arrow
 Description:            A continuation-based stream processor implemented as an
@@ -18,7 +18,7 @@ Tested-With:            GHC == 6.12.3
 
 Source-Repository head
   Type:                 git
-  Location:             git://gitorious.org/streamproc/mainline.git
+  Location:             git://github.com/peti/streamproc.git
 
 Library
   Build-Depends:        base >= 3 && < 5
