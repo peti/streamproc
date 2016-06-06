@@ -9,12 +9,12 @@ Homepage:               http://github.com/peti/streamproc
 Category:               Control
 Synopsis:               Stream Processer Arrow
 Description:            A continuation-based stream processor implemented as an
-			Arrow. This version generalizes the SP type described
-			in John Hughes \"Generalising Monads to Arrows\" to
-			function as a wrapper for arbitrary monads.
+                        Arrow. This version generalizes the SP type described
+                        in John Hughes \"Generalising Monads to Arrows\" to
+                        function as a wrapper for arbitrary monads.
 Cabal-Version:          >= 1.6
 Build-Type:             Simple
-Tested-With:            GHC >= 6.12.3 && <= 7.6.2
+Tested-With:            GHC > 7 && < 8.1
 
 Source-Repository head
   Type:                 git
