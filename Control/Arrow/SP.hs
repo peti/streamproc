@@ -39,12 +39,12 @@ data SP m i o = Put o (SP m i o)
               | Block (m (SP m i o))
 
 instance Monad m => Category (SP m) where
-  id                      = Get (\x -> Put x id)
+  id                      = Get (`Put` id)
   (Get sp2) . (Put i sp1) = sp1 >>> sp2 i
   (Put o sp2) . sp1       = Put o (sp1 >>> sp2)
   (Get sp2) . (Get sp1)   = Get (\i -> sp1 i >>> Get sp2)
-  (Block spm) . sp        = Block (liftM (sp >>>) spm)
-  sp . (Block spm)        = Block (liftM (>>> sp) spm)
+  (Block spm) . sp        = Block (fmap (sp >>>) spm)
+  sp . (Block spm)        = Block (fmap (>>> sp) spm)
 
 instance Monad m => Arrow (SP m) where
   arr f                   = Get (\x -> Put (f x) (arr f))
@@ -52,7 +52,7 @@ instance Monad m => Arrow (SP m) where
     where
       bypass :: Monad m => Queue c -> SP m a b -> SP m (a,c) (b,c)
       bypass q (Get f)     = Get (\(a,c) -> bypass (push c q) (f a))
-      bypass q (Block spm) = Block (liftM (bypass q) spm)
+      bypass q (Block spm) = Block (fmap (bypass q) spm)
       bypass q (Put c sp)  = case pop q of
                                 Just (c', q') -> Put (c,c') (bypass q' sp)
                                 Nothing       -> Get (\(_,d) -> Put (c,d) (bypass q sp))
@@ -60,7 +60,7 @@ instance Monad m => Arrow (SP m) where
 -- ArrowZero just waits in a state getting input forever.
 
 instance Monad m => ArrowZero (SP m) where
-  zeroArrow = Get (\_ -> zeroArrow)
+  zeroArrow = Get (const zeroArrow)
 
 -- ArrowPlus allows running in parallel, output merged into
 -- a single stream.
@@ -69,24 +69,24 @@ instance Monad m => ArrowPlus (SP m) where
   Put o sp1  <+> sp2        = Put o (sp1 <+> sp2)
   sp1        <+> Put o sp2  = Put o (sp1 <+> sp2)
   Get sp1    <+> Get sp2    = Get (\i -> sp1 i <+> sp2 i )
-  sp1        <+> Block spm  = Block (liftM (sp1 <+>) spm)
-  Block spm  <+> sp2        = Block (liftM (<+> sp2) spm)
+  sp1        <+> Block spm  = Block (fmap (sp1 <+>) spm)
+  Block spm  <+> sp2        = Block (fmap (<+> sp2) spm)
 
 -- Left messages pass through like a conduit. Right messages
 -- are processed by the SP.
 
 instance Monad m => ArrowChoice (SP m) where
   left (Put c sp)  = Put (Left c) (left sp)
-  left (Block spm) = Block (liftM left spm)
+  left (Block spm) = Block (fmap left spm)
   left (Get f)     = Get (either (left . f) (\b -> Put (Right b) (left (Get f))))
 
 -- A feedback loop where a SP can examine it's own output.
 
 instance Monad m => ArrowLoop (SP m) where
-  loop sp = loop' empty sp
+  loop = loop' empty
     where
     loop' :: Monad m => Queue c -> SP m (a,c) (b,c) -> SP m a b
-    loop' q (Block spm)     = Block (liftM (loop' q) spm)
+    loop' q (Block spm)     = Block (fmap (loop' q) spm)
     loop' q (Put (a,b) sp') = Put a (loop' (push b q) sp')
     loop' q (Get sp')       = case pop q of
                                 Just (i, q') -> Get (\x -> loop' q' (sp' (x,i)))

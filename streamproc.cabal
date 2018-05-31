@@ -14,13 +14,13 @@ Description:            A continuation-based stream processor implemented as an
                         function as a wrapper for arbitrary monads.
 Cabal-Version:          >= 1.6
 Build-Type:             Simple
-Tested-With:            GHC > 7 && < 8.1
+tested-with:            GHC == 7.10.3, GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.3
 
 Source-Repository head
   Type:                 git
   Location:             git://github.com/peti/streamproc.git
 
 Library
-  Build-Depends:        base >= 3 && < 5
+  Build-Depends:        base > 4.8 && < 5
   Exposed-Modules:      Control.Arrow.SP
   Ghc-Options:          -Wall
