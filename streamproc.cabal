@@ -21,6 +21,6 @@ Source-Repository head
   Location:             git://github.com/peti/streamproc.git
 
 Library
-  Build-Depends:        base > 4.8 && < 5
+  Build-Depends:        base > 4.8 && < 4.13
   Exposed-Modules:      Control.Arrow.SP
   Ghc-Options:          -Wall
