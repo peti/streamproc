@@ -19,7 +19,7 @@ tested-with:            GHC == 7.10.3, GHC == 8.0.2, GHC == 8.2.2, GHC == 8.4.4,
 
 Source-Repository head
   Type:                 git
-  Location:             git://github.com/peti/streamproc.git
+  Location:             https://github.com/peti/streamproc.git
 
 Library
   Build-Depends:        base > 4.8 && < 4.13
