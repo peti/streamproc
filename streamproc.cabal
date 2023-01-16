@@ -24,4 +24,3 @@ Source-Repository head
 Library
   Build-Depends:        base > 4.8 && < 4.13
   Exposed-Modules:      Control.Arrow.SP
-  Ghc-Options:          -Wall
